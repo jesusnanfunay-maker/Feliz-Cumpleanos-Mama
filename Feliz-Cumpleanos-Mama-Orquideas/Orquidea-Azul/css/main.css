@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0f0a;
+  font-family: Georgia, "Palatino Linotype", "Book Antiqua", serif;
+}
+
+.scene {
+  position: relative;
+  width: min(96vw, 640px);
+  height: min(96vw, 640px);
+  background: #0a0f0a;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========== MENSAJE CENTRAL ========== */
+.message-area {
+  position: relative;
+  z-index: 20;
+  text-align: center;
+  max-width: 62%;
+  padding: 0.5rem;
+}
+
+.love-text {
+  font-size: clamp(1.55rem, 4.8vw, 2.15rem);
+  font-weight: 600;
+  color: #f5e6a3;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.85rem;
+  line-height: 1.25;
+  text-shadow: 0 0 18px rgba(245, 230, 163, 0.25);
+}
+
+.heart {
+  color: #f5c842;
+  font-size: 0.9em;
+}
+
+.sub-message {
+  font-size: clamp(0.78rem, 2.1vw, 0.98rem);
+  color: #e8d98a;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.9rem;
+}
+
+.closing {
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  color: #f5e6a3;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+
+.closing .heart {
+  margin-left: 0.15em;
+}
+
+/* ========== SVG WREATH ========== */
+.wreath-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Audio button discreto abajo */
+.audio-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+}
+
+.play-btn {
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-family: system-ui, sans-serif;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.play-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.play-btn.playing {
+  background: linear-gradient(135deg, #5b8def, #3a6fd8);
+  border-color: transparent;
+  color: white;
+}

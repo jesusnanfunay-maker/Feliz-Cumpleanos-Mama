@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Cumpleaños Mamá 💙</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0a0f14;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      overflow-x: hidden;
+      color: #f5e6c8;
+      padding: 1.5rem 1rem 2rem;
+    }
+
+    .card {
+      position: relative;
+      width: min(520px, 96vw);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-image {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow:
+        0 0 0 1px rgba(245, 215, 110, 0.15),
+        0 12px 40px rgba(0, 0, 0, 0.55),
+        0 0 60px rgba(42, 107, 184, 0.18);
+      display: block;
+    }
+
+    .audio-controls {
+      margin-top: 1.6rem;
+      z-index: 3;
+    }
+
+    .play-btn {
+      background: linear-gradient(135deg, #2a6bb8, #1a4a8a);
+      color: #f0e6c8;
+      border: 1px solid rgba(245, 215, 110, 0.35);
+      padding: 0.75rem 1.8rem;
+      border-radius: 999px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 4px 18px rgba(30, 90, 160, 0.35);
+    }
+
+    .play-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(30, 90, 160, 0.5);
+      background: linear-gradient(135deg, #3578c8, #2258a0);
+    }
+
+    .play-btn:active {
+      transform: translateY(0);
+    }
+
+    .play-btn.playing {
+      background: linear-gradient(135deg, #1a4a8a, #0f3260);
+      box-shadow: 0 4px 18px rgba(20, 60, 120, 0.45);
+    }
+
+    /* Sutil brillo de fondo */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(30, 80, 140, 0.18) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card, .audio-controls {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <audio id="audio" src="sound/mensaje-mama.m4a" preload="auto"></audio>
+
+  <div class="card">
+    <img
+      class="card-image"
+      src="img/mensaje-mama.jpg"
+      alt="Feliz cumpleaños, mamá — Gracias por ser mi luz, mi apoyo y mi lugar favorito en el mundo. Te amo muchísimo"
+    />
+  </div>
+
+  <div class="audio-controls">
+    <button id="playBtn" class="play-btn">▶ Escuchar mensaje</button>
+  </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+
+    function updateButton() {
+      if (audio.paused) {
+        playBtn.textContent = '▶ Escuchar mensaje';
+        playBtn.classList.remove('playing');
+      } else {
+        playBtn.textContent = '❚❚ Pausar';
+        playBtn.classList.add('playing');
+      }
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().then(updateButton).catch(() => {
+          alert('Toca de nuevo para escuchar.');
+        });
+      } else {
+        audio.pause();
+        updateButton();
+      }
+    });
+
+    // Intento de autoplay (los navegadores suelen bloquearlo sin interacción)
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        audio.play().then(updateButton).catch(() => {});
+      }, 600);
+    });
+
+    audio.addEventListener('ended', updateButton);
+  </script>
+</body>
+</html>
